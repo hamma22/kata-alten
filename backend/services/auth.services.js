@@ -14,8 +14,7 @@ async function registerUser({ firstName, lastName, email, password }) {
   if (existingUser) throw new Error("User already exists");
 
   const user = new User({ firstName, lastName, email, password });
-  await user.save();
-  return user;
+  return await user.save();
 }
 
 async function loginUser({ email, password }) {

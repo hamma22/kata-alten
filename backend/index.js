@@ -6,7 +6,7 @@ const errorHandler = require("./middleware/errorHandler");
 const logger = require("./config/logger");
 require("dotenv").config();
 
-const { host, jwtSecret, port } = require("./config/config");
+const { host, port } = require("./config/config");
 
 const app = express();
 
@@ -42,7 +42,6 @@ app.get("/healthcheck", (_, res) => {
 });
 
 const apiRoutes = require("./routes/api");
-const config = require("./config/config");
 
 app.use("/api", apiRoutes);
 
