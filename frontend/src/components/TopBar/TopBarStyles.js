@@ -1,0 +1,2 @@
+const TopBarStyles = {};
+export { TopBarStyles };
