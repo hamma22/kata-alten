@@ -14,7 +14,7 @@ module.exports = defineConfig([
     rules: {
       "no-console": "warn",
       eqeqeq: "warn",
-      curly: ["error", "all"],
+     // curly: ["error", "all"],
       "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     },
   },

@@ -3,15 +3,16 @@ const cors = require("cors");
 const compression = require("compression");
 const morgan = require("morgan");
 const errorHandler = require("./middleware/errorHandler");
-const config = require("config");
 const logger = require("./config/logger");
-
 require("dotenv").config();
+
+const { host, jwtSecret, port } = require("./config/config");
 
 const app = express();
 
-const port = config.get("port");
-const host = config.get("host");
+const connectDB = require("./config/db");
+
+connectDB();
 
 app.use(cors());
 app.use(express.json());
@@ -40,4 +41,9 @@ app.get("/healthcheck", (_, res) => {
   });
 });
 
-app.use(errorHandler); // Error handling middleware
+const apiRoutes = require("./routes/api");
+const config = require("./config/config");
+
+app.use("/api", apiRoutes);
+
+app.use(errorHandler);
