@@ -1,37 +1,71 @@
-import { Box, Container } from "@mui/material";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import "./App.css";
-import TopBar from "./components/TopBar/TopBar";
-import FavoritesPage from "./pages/FavoritesPage";
+import LoginPage from "./pages/LoginPage";
+import ProductsPage from "./pages/ProductsPage";
 import CartPage from "./pages/CartPage";
-import ProductsPage from "./pages/productsPage";
+import FavoritesPage from "./pages/FavoritesPage";
+import PrivateRoute from "./routes/PrivateRoute";
+import MainLayout from "./layouts/MainLayout";
 import { ROUTES } from "./constants/routes";
+import { fetchUser, selectUserStatus } from "./store/slices/userSlice";
+import { Box, CircularProgress } from "@mui/material";
 
 function App() {
-  return (
-    <Box display="flex" flexDirection="column" height="100vh" overflow="hidden">
-      <TopBar />
-      <Box
-        component="main"
-        sx={{
-          flex: 1,
-          overflowY: "auto",
-          mt: "90px",
-        }}
-      >
-        <Container maxWidth disableGutters>
-          <Routes>
-            <Route path="/" element={<Navigate to={ROUTES.PRODUCTS} />} />
-            {/*  <Route path="/home" element={<HomePage />} /> */}
-            <Route path="/products" element={<ProductsPage />} />
-            <Route path="/favorites" element={<FavoritesPage />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="*" element={<h2>404 - Not Found</h2>} />
-          </Routes>
-        </Container>
+  const dispatch = useDispatch();
+  const userStatus = useSelector(selectUserStatus);
+
+  useEffect(() => {
+    if (localStorage.getItem("kata-app-token")) {
+      dispatch(fetchUser());
+    }
+  }, [dispatch]);
+
+  const isAuthCheckInProgress =
+    localStorage.getItem("kata-app-token") && userStatus !== "succeeded";
+
+  if (isAuthCheckInProgress) {
+    return (
+      <Box display="flex" justifyContent="center" mt={10}>
+        <CircularProgress />
       </Box>
-    </Box>
+    );
+  }
+
+  return (
+    <Routes>
+      <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<Navigate to={ROUTES.PRODUCTS} />} />
+        <Route
+          path={ROUTES.PRODUCTS}
+          element={
+            <PrivateRoute>
+              <ProductsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.FAVORITES}
+          element={
+            <PrivateRoute>
+              <FavoritesPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.CART}
+          element={
+            <PrivateRoute>
+              <CartPage />
+            </PrivateRoute>
+          }
+        />
+      </Route>
+      <Route path="*" element={<h2>404 - Not Found</h2>} />
+    </Routes>
   );
 }
 

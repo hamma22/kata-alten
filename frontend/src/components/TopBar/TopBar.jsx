@@ -17,8 +17,15 @@ import { ROUTES } from "../../constants/routes";
 import { useTopBar } from "./TopBarHook";
 
 const TopBar = () => {
-  const { navigate, handleClose, handleMenu, anchorEl, cartTotal } =
-    useTopBar();
+  const {
+    navigate,
+    handleClose,
+    handleMenu,
+    anchorEl,
+    cartTotal,
+    handleLogout,
+    isAdmin,
+  } = useTopBar();
 
   return (
     <AppBar position="fixed" color="primary">
@@ -31,25 +38,27 @@ const TopBar = () => {
             KatAlten
           </Link>
         </Typography>
-        <Grid container spacing={1}>
-          <IconButton
-            size="medium"
-            color="inherit"
-            onClick={() => navigate(ROUTES.FAVORITES)}
-            disabled
-          >
-            <Heart size={25} />
-          </IconButton>
-          <IconButton
-            size="medium"
-            color="inherit"
-            // onClick={() => navigate(ROUTES.CART)}
-          >
-            <Badge badgeContent={cartTotal} color="secondary">
-              <ShoppingCart size={25} />
-            </Badge>
-          </IconButton>
-        </Grid>
+        {!isAdmin && (
+          <Grid container spacing={1}>
+            <IconButton
+              size="medium"
+              color="inherit"
+              onClick={() => navigate(ROUTES.FAVORITES)}
+              disabled
+            >
+              <Heart size={25} />
+            </IconButton>
+            <IconButton
+              size="medium"
+              color="inherit"
+              // onClick={() => navigate(ROUTES.CART)}
+            >
+              <Badge badgeContent={cartTotal} color="secondary">
+                <ShoppingCart size={25} />
+              </Badge>
+            </IconButton>
+          </Grid>
+        )}
         <Box sx={{ ml: 2 }}>
           <IconButton size="medium" onClick={handleMenu} color="inherit">
             <Avatar alt="User Avatar">MB</Avatar>
@@ -70,8 +79,8 @@ const TopBar = () => {
           >
             <MenuItem onClick={handleClose}>Mon profile</MenuItem>
             <MenuItem onClick={handleClose}>Mon Compte</MenuItem>
-            <MenuItem onClick={handleClose}>Contact</MenuItem>
-            <MenuItem onClick={handleClose}>Se déconnecter</MenuItem>
+            {!isAdmin && <MenuItem onClick={handleClose}>Contact</MenuItem>}
+            <MenuItem onClick={handleLogout}>Se déconnecter</MenuItem>
           </Menu>
         </Box>
       </Toolbar>

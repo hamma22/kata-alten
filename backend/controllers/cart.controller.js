@@ -1,5 +1,5 @@
 const logger = require("../config/logger");
-const cartService = require("../services/cart.service");
+const cartService = require("../services/cart.services");
 
 async function getCart(req, res) {
   try {

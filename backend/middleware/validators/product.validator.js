@@ -7,7 +7,7 @@ const productSchema = Joi.object({
   code: Joi.string().required(),
   quantity: Joi.number().integer().min(0).required(),
   internalReference: Joi.string().allow(""),
-  shellId: Joi.number().required(),
+  shellId: Joi.number().allow(""),
   category: Joi.string().required(),
 });
 

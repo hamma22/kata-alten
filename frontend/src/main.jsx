@@ -10,7 +10,7 @@ import "./index.css";
 import GlobalError from "./components/GlobalError/GlobalError.jsx";
 import { Provider } from "react-redux";
 import store from "./store";
-import { CartProvider } from "./Context/CartContext.jsx";
+import { CartProvider } from "./context/CartContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>

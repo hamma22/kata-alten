@@ -10,7 +10,9 @@ import {
   selectProductsStatus,
   clearProducts,
 } from "../../store/slices/productsSlice";
-import { useCart } from "../../Context/CartContext";
+import { useCart } from "../../context/CartContext";
+import { selectUserRoleAdmin } from "../../store/slices/userSlice";
+import { useMemo } from "react";
 
 export const useProductsList = ({ searchTerm = "" }) => {
   const { cart, toggleCart } = useCart();
@@ -20,11 +22,18 @@ export const useProductsList = ({ searchTerm = "" }) => {
   const currentPage = useSelector(selectProductsPage);
   const totalPages = useSelector(selectProductsPages);
   const status = useSelector(selectProductsStatus);
-  const error = useSelector(selectProductsError);
 
   const scrollContainerRef = useRef(null);
 
   const PAGE_LIMIT = 20;
+
+  const isLoadingProducts = status === "loading" && products.length === 0;
+
+  //just to use useMemo hook
+  const filtredproducts = useMemo(
+    () => products?.filter((item) => item?.name),
+    [products]
+  );
 
   useEffect(() => {
     dispatch(clearProducts());
@@ -56,11 +65,10 @@ export const useProductsList = ({ searchTerm = "" }) => {
   }, [dispatch, status, currentPage, totalPages, searchTerm]);
 
   return {
-    products,
-    status,
-    error,
+    products: filtredproducts,
     scrollContainerRef,
     handleToggleCart: toggleCart,
     cart,
+    isLoadingProducts,
   };
 };

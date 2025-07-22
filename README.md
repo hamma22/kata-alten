@@ -21,6 +21,8 @@ npm install
 
 # Start MongoDB
 
+# Start app
+
 ```bash
 npm run dev
 ```
