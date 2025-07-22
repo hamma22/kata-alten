@@ -25,6 +25,7 @@ const TopBar = () => {
     cartTotal,
     handleLogout,
     isAdmin,
+    userData,
   } = useTopBar();
 
   return (
@@ -61,7 +62,11 @@ const TopBar = () => {
         )}
         <Box sx={{ ml: 2 }}>
           <IconButton size="medium" onClick={handleMenu} color="inherit">
-            <Avatar alt="User Avatar">MB</Avatar>
+            <Avatar alt="User Avatar">
+              {`${userData?.firstName?.[0] || ""}${
+                userData?.lastName?.[0] || ""
+              }`}
+            </Avatar>
           </IconButton>
           <Menu
             id="profile-menu"

@@ -46,3 +46,7 @@ const apiRoutes = require("./routes/api");
 app.use("/api", apiRoutes);
 
 app.use(errorHandler);
+
+const setupSwagger = require("./config/swagger");
+
+setupSwagger(app);

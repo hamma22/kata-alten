@@ -30,8 +30,12 @@ const schema = yup.object({
     .integer("Quantity must be an integer")
     .min(0, "Quantity cannot be negative")
     .required("Quantity is required"),
-  description: yup.string().required("Description is required"),
+  description: yup
+    .string()
+    .required("Description is required")
+    .max(300, "Description can't exceed 500 characters"),
 });
+
 const defaultValues = {
   name: "",
   price: 10,
@@ -40,6 +44,7 @@ const defaultValues = {
   description: "",
   code: "",
 };
+
 const ProductFormDialog = ({ open, onClose, onProductAdded }) => {
   const {
     register,
@@ -71,75 +76,69 @@ const ProductFormDialog = ({ open, onClose, onProductAdded }) => {
       <DialogTitle>Ajouter un nouveau produit</DialogTitle>
       <DialogContent>
         <form id="product-form" onSubmit={handleSubmit(onSubmit)} noValidate>
-          <Grid container spacing={2} mt={1}>
-            <Grid item xs={12}>
-              <TextField
-                label="Name"
-                fullWidth
-                {...register("name")}
-                error={!!errors.name}
-                helperText={errors.name?.message}
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Code"
-                fullWidth
-                {...register("code")}
-                error={!!errors.code}
-                helperText={errors.code?.message}
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Price"
-                type="number"
-                fullWidth
-                {...register("price")}
-                error={!!errors.price}
-                helperText={errors.price?.message}
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Category"
-                fullWidth
-                {...register("category")}
-                error={!!errors.category}
-                helperText={errors.category?.message}
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Quantity"
-                type="number"
-                fullWidth
-                {...register("quantity")}
-                error={!!errors.quantity}
-                helperText={errors.quantity?.message}
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Description"
-                multiline
-                rows={3}
-                fullWidth
-                {...register("description")}
-                error={!!errors.description}
-                helperText={errors.description?.message}
-                required
-              />
-            </Grid>
+          <Grid container columns={1} gap={2} sx={{ mt: 1 }}>
+            <TextField
+              label="Name"
+              fullWidth
+              variant="outlined"
+              {...register("name")}
+              error={!!errors.name}
+              helperText={errors.name?.message}
+              required
+            />
+            <TextField
+              label="Code"
+              fullWidth
+              variant="outlined"
+              {...register("code")}
+              error={!!errors.code}
+              helperText={errors.code?.message}
+              required
+            />
+            <TextField
+              label="Price"
+              type="number"
+              fullWidth
+              variant="outlined"
+              {...register("price")}
+              error={!!errors.price}
+              helperText={errors.price?.message}
+              required
+            />
+            <TextField
+              label="Category"
+              fullWidth
+              variant="outlined"
+              {...register("category")}
+              error={!!errors.category}
+              helperText={errors.category?.message}
+              required
+            />
+            <TextField
+              label="Quantity"
+              type="number"
+              fullWidth
+              variant="outlined"
+              {...register("quantity")}
+              error={!!errors.quantity}
+              helperText={errors.quantity?.message}
+              required
+            />
+            <TextField
+              label="Description"
+              multiline
+              rows={3}
+              fullWidth
+              variant="outlined"
+              {...register("description")}
+              error={!!errors.description}
+              helperText={errors.description?.message}
+              required
+            />
           </Grid>
         </form>
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={{ mb: 1 }}>
         <Button onClick={onClose} disabled={isSubmitting}>
           Cancel
         </Button>

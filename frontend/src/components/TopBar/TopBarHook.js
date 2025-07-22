@@ -4,13 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useCart } from "../../context/CartContext";
 import { ROUTES } from "../../constants/routes";
-import { clearUser, selectUserRoleAdmin } from "../../store/slices/userSlice";
+import {
+  clearUser,
+  selectUserRoleAdmin,
+  selectUser,
+} from "../../store/slices/userSlice";
 
 export const useTopBar = () => {
   const { cart } = useCart();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAdmin = useSelector(selectUserRoleAdmin);
+  const userData = useSelector(selectUser);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -35,5 +40,6 @@ export const useTopBar = () => {
     cartTotal: cart?.length ?? 0,
     handleLogout,
     isAdmin,
+    userData,
   };
 };
