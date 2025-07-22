@@ -17,14 +17,15 @@ import { ROUTES } from "../../constants/routes";
 import { useTopBar } from "./TopBarHook";
 
 const TopBar = () => {
-  const { navigate, handleClose, handleMenu, anchorEl } = useTopBar();
+  const { navigate, handleClose, handleMenu, anchorEl, cartTotal } =
+    useTopBar();
 
   return (
     <AppBar position="fixed" color="primary">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link
-            to={ROUTES.HOME}
+            to={ROUTES.PRODUCTS}
             style={{ color: "inherit", textDecoration: "none" }}
           >
             KatAlten
@@ -35,24 +36,23 @@ const TopBar = () => {
             size="medium"
             color="inherit"
             onClick={() => navigate(ROUTES.FAVORITES)}
+            disabled
           >
-            <Badge badgeContent={6} color="secondary">
-              <Heart size={25} />
-            </Badge>
+            <Heart size={25} />
           </IconButton>
           <IconButton
             size="medium"
             color="inherit"
-            onClick={() => navigate(ROUTES.CART)}
+            // onClick={() => navigate(ROUTES.CART)}
           >
-            <Badge badgeContent={2} color="secondary">
+            <Badge badgeContent={cartTotal} color="secondary">
               <ShoppingCart size={25} />
             </Badge>
           </IconButton>
         </Grid>
         <Box sx={{ ml: 2 }}>
           <IconButton size="medium" onClick={handleMenu} color="inherit">
-            <Avatar alt="User Avatar" src="" />
+            <Avatar alt="User Avatar">MB</Avatar>
           </IconButton>
           <Menu
             id="profile-menu"
@@ -70,6 +70,7 @@ const TopBar = () => {
           >
             <MenuItem onClick={handleClose}>Mon profile</MenuItem>
             <MenuItem onClick={handleClose}>Mon Compte</MenuItem>
+            <MenuItem onClick={handleClose}>Contact</MenuItem>
             <MenuItem onClick={handleClose}>Se déconnecter</MenuItem>
           </Menu>
         </Box>

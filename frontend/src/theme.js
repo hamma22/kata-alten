@@ -1,6 +1,21 @@
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
+  components: {
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          outline: "none",
+          "&:focus": {
+            outline: "none",
+          },
+          "&:focus-visible": {
+            outline: "none",
+          },
+        },
+      },
+    },
+  },
   typography: {
     fontFamily: `'Poppins', sans-serif`,
   },

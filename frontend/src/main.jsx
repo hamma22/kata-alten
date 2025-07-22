@@ -10,6 +10,7 @@ import "./index.css";
 import GlobalError from "./components/GlobalError/GlobalError.jsx";
 import { Provider } from "react-redux";
 import store from "./store";
+import { CartProvider } from "./Context/CartContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -23,7 +24,9 @@ createRoot(document.getElementById("root")).render(
           onReset={() => {}}
           onError={(e) => console.log("Error:", e?.message)}
         >
-          <App />
+          <CartProvider>
+            <App />
+          </CartProvider>
         </ErrorBoundary>
       </ThemeProvider>
     </BrowserRouter>

@@ -11,8 +11,39 @@ async function updateProduct({ id, updateData }) {
   return product;
 }
 
-async function listProducts() {
-  return Product.find();
+async function listProducts({ search, page, limit }) {
+  const query = {};
+
+  if (search) {
+    query.$or = [
+      { name: { $regex: search, $options: "i" } },
+      { description: { $regex: search, $options: "i" } },
+      { category: { $regex: search, $options: "i" } },
+    ];
+  }
+
+  if (!page || !limit) {
+    const products = await Product.find(query);
+    return {
+      products,
+      total: products.length,
+    };
+  }
+
+  const skip = (page - 1) * limit;
+
+  const productsPromise = Product.find(query).skip(skip).limit(limit);
+
+  const countPromise = Product.countDocuments(query);
+
+  const [products, total] = await Promise.all([productsPromise, countPromise]);
+
+  return {
+    products,
+    total,
+    page,
+    pages: Math.ceil(total / limit),
+  };
 }
 
 async function deleteProduct(id) {

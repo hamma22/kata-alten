@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../Context/CartContext";
 
 export const useTopBar = () => {
+  const { cart } = useCart();
+
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -18,5 +21,6 @@ export const useTopBar = () => {
     handleClose,
     handleMenu,
     anchorEl,
+    cartTotal: cart?.length ?? 0,
   };
 };

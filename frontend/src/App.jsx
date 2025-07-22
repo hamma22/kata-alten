@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import "./App.css";
 import TopBar from "./components/TopBar/TopBar";
-import HomePage from "./pages/HomePage";
 import FavoritesPage from "./pages/FavoritesPage";
 import CartPage from "./pages/CartPage";
 import ProductsPage from "./pages/productsPage";
@@ -18,13 +17,13 @@ function App() {
         sx={{
           flex: 1,
           overflowY: "auto",
-          mt: "70px",
+          mt: "90px",
         }}
       >
-        <Container maxWidth>
+        <Container maxWidth disableGutters>
           <Routes>
-            <Route path="/" element={<Navigate to={ROUTES.HOME} />} />
-            <Route path="/home" element={<HomePage />} />
+            <Route path="/" element={<Navigate to={ROUTES.PRODUCTS} />} />
+            {/*  <Route path="/home" element={<HomePage />} /> */}
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/cart" element={<CartPage />} />

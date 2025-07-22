@@ -4,9 +4,19 @@ const productService = require("../services/products.services");
 // GET /products
 async function getProducts(req, res) {
   try {
-    const products = await productService.listProducts();
+    const { search, page, limit } = req.query;
+
+    const parsedPage = parseInt(page);
+    const parsedLimit = parseInt(limit);
+
+    const result = await productService.listProducts({
+      search,
+      page: parsedPage,
+      limit: parsedLimit,
+    });
+
     logger.info("Fetched products successfully");
-    res.json(products);
+    res.json(result);
   } catch (err) {
     logger.error("Error fetching products:", err);
     res.status(500).json({ error: err.message });

@@ -6,6 +6,16 @@ body,
   margin: 0;
   padding: 0;
 }
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background: "#fff";
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 7px;
+  background: #d1d1d1;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
