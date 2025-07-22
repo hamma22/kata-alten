@@ -3,25 +3,28 @@
 # ✅ Work Completed
 
 🔐 Authentication & Authorization
-User registration
-User login
-Auth verification
-Role-based access control (user, admin)
-Private routes for protected pages
-Conditional UI rendering based on roles
+
+- User registration
+- User login
+- Auth verification
+- Role-based access control (user, admin)
+- Private routes for protected pages
+- Conditional UI rendering based on roles
 
 👤 User Features
-Product listing as cards
-Infinite scroll pagination (on scroll end)
-Product search
-Add product to cart
-Remove product from cart
+
+- Product listing as cards
+- Infinite scroll pagination (on scroll end)
+- Product search
+- Add product to cart
+- Remove product from cart
 
 🛠️ Admin Features
-Product listing in table view
-Search
-Pagination
-Add new product (via dialog form with validation)
+
+- Product listing in table view
+- Search
+- Pagination
+- Add new product (via dialog form with validation)
 
 # Backend
 
