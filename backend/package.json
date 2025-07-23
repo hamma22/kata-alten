@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:integration": "cross-env NODE_ENV=test jest tests/integration",
+    "test:unit": "jest tests/unit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:watch": "nodemon --ext js,mjs,cjs --exec \"npx eslint .\""
@@ -23,6 +24,7 @@
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.4",
+    "mongoose-paginate-v2": "^1.9.1",
     "morgan": "^1.10.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
@@ -30,8 +32,12 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
+    "cross-env": "^7.0.3",
     "eslint": "^9.31.0",
     "globals": "^16.3.0",
-    "nodemon": "^3.1.10"
+    "jest": "^30.0.5",
+    "mockingoose": "^2.16.2",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4"
   }
 }

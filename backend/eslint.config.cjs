@@ -8,13 +8,16 @@ module.exports = defineConfig([
     plugins: { js },
     extends: ["js/recommended"],
     languageOptions: {
-      globals: globals.node,
+      globals: {
+        ...globals.node,
+        ...globals.jest,
+      },
       sourceType: "commonjs",
     },
     rules: {
       "no-console": "warn",
       eqeqeq: "warn",
-     // curly: ["error", "all"],
+      // curly: ["error", "all"],
       "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     },
   },

@@ -3,15 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   fetchProducts,
-  selectProductsError,
   selectProductsItems,
   selectProductsPage,
   selectProductsPages,
   selectProductsStatus,
   clearProducts,
 } from "../../store/slices/productsSlice";
-import { useCart } from "../../context/CartContext";
-import { selectUserRoleAdmin } from "../../store/slices/userSlice";
+import { useCart } from "../../contexts/CartContext";
 import { useMemo } from "react";
 
 export const useProductsList = ({ searchTerm = "" }) => {

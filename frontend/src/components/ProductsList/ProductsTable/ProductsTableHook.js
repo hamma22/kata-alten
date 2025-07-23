@@ -46,5 +46,6 @@ export const useProductsTable = ({ search }) => {
     fetchProducts,
     limit,
     page,
+    setLimit,
   };
 };

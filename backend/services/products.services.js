@@ -30,19 +30,16 @@ async function listProducts({ search, page, limit }) {
     };
   }
 
-  const skip = (page - 1) * limit;
-
-  const productsPromise = Product.find(query).skip(skip).limit(limit);
-
-  const countPromise = Product.countDocuments(query);
-
-  const [products, total] = await Promise.all([productsPromise, countPromise]);
+  const result = await Product.paginate(query, {
+    page,
+    limit,
+  });
 
   return {
-    products,
-    total,
-    page,
-    pages: Math.ceil(total / limit),
+    products: result.docs,
+    total: result.totalDocs,
+    page: result.page,
+    pages: result.totalPages,
   };
 }
 

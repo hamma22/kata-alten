@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Box, CircularProgress } from "@mui/material";
 
 import LoginPage from "./pages/LoginPage";
 import ProductsPage from "./pages/ProductsPage";
@@ -10,7 +11,6 @@ import PrivateRoute from "./routes/PrivateRoute";
 import MainLayout from "./layouts/MainLayout";
 import { ROUTES } from "./constants/routes";
 import { fetchUser, selectUserStatus } from "./store/slices/userSlice";
-import { Box, CircularProgress } from "@mui/material";
 
 function App() {
   const dispatch = useDispatch();

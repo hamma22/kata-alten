@@ -27,11 +27,11 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (productId) => {
-    setCart((prevCart) => prevCart.filter((id) => id !== productId));
+    setCart((prevCart) => prevCart?.filter((id) => id !== productId));
   };
 
   const toggleCart = (productId) => {
-    if (cart.includes(productId)) {
+    if (cart?.includes(productId)) {
       removeFromCart(productId);
     } else {
       addToCart(productId);

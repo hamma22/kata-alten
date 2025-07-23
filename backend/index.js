@@ -50,3 +50,5 @@ app.use(errorHandler);
 const setupSwagger = require("./config/swagger");
 
 setupSwagger(app);
+
+module.exports = app;

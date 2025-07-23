@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../contexts/CartContext";
 import { ROUTES } from "../../constants/routes";
 import {
   clearUser,

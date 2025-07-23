@@ -30,6 +30,7 @@ const ProductsTable = ({ search, setSearch }) => {
     fetchProducts,
     limit,
     page,
+    setLimit,
   } = useProductsTable({ search });
 
   return (
