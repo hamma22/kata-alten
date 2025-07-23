@@ -24,6 +24,19 @@ const productSchema = new mongoose.Schema(
   }
 );
 
+// Automatically set inventoryStatus based on quantity
+productSchema.pre("save", function (next) {
+  if (this.quantity === 0) {
+    this.inventoryStatus = "OUTOFSTOCK";
+  } else if (this.quantity < 10) {
+    this.inventoryStatus = "LOWSTOCK";
+  } else {
+    this.inventoryStatus = "INSTOCK";
+  }
+
+  next();
+});
+
 productSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model("Product", productSchema);
