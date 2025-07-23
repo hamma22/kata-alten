@@ -37,6 +37,7 @@
 
 - cd backend
 - npm install
+- add .env file with .env.example file content
 - npm run dev
 - The backend will start at http://localhost:5000.
 
@@ -48,6 +49,7 @@
 
 - cd frontend
 - yarn
+- add .env file with .env.example file content
 - yarn run dev
 - The frontend will run at http://localhost:3000.
 
